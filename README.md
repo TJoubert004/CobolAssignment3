@@ -10,6 +10,7 @@ ___
 * [Tech Stack](#tech-stack)
 * [Installation](#installation)
 * [Running Output](#running-output)
+* [Learning Outcomes] (#learning-outcomes)
 * [Help](#help)
 * [Authors](#authors)
 
@@ -28,6 +29,10 @@ ___
 ___
 addme
 
+## Learning Outcomes
+___
+addme
+
 ## Help
 ___
 * Make sure compiler is running correctly.
@@ -41,13 +46,13 @@ ___
 
 
 **Clay Rasmussen**
-* **Clay's GitHub Profile**: [Clay-Rasmussen](https://github.com/Clay-Rasmussen)
 ___
+* **Clay's GitHub Profile**: [Clay-Rasmussen](https://github.com/Clay-Rasmussen)
 * **Clay's Email**: [Clrasm02@wsc.edu](mailto:clrasm02@wsc.edu)
 
 **Tristan Joubert**
-* **Tristan's GitHub Profile**: [Clay-Rasmussen](https://github.com/TJoubert004)
 ___
+* **Tristan's GitHub Profile**: [Clay-Rasmussen](https://github.com/TJoubert004)
 * **Tristan's Email**: [Clrasm02@wsc.edu](mailto:trjoub01@wsc.edu)
 
 [Back to the top](#overview)
