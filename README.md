@@ -54,16 +54,14 @@ ___
 ## Authors
 ___
 <img src="https://github.com/Clay-Rasmussen.png" alt="Profile Picture" width="100" />
-<img src="https://github.com/TJoubert004.png" alt="Profile Picture" width="100" />
-
 
 **Clay Rasmussen**
-___
 * **Clay's GitHub Profile**: [Clay-Rasmussen](https://github.com/Clay-Rasmussen)
 * **Clay's Email**: [Clrasm02@wsc.edu](mailto:clrasm02@wsc.edu)
+___
+<img src="https://github.com/TJoubert004.png" alt="Profile Picture" width="100" />
 
 **Tristan Joubert**
-___
 * **Tristan's GitHub Profile**: [Tristan-Joubert](https://github.com/TJoubert004)
 * **Tristan's Email**: [trjoub01@wsc.edu](mailto:trjoub01@wsc.edu)
 
