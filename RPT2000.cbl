@@ -2,9 +2,9 @@
 
        PROGRAM-ID. RPT2000.
       *****************************************************************
-      *  Programmers: Tristan Joubert Clay Rasmussen                   
-      *  Date.......: February 19, 2025                                
-      *  GitHub URL.: https://github.com/TJoubert004/CobolAssignment3  
+      *  Programmers: Tristan Joubert Clay Rasmussen
+      *  Date.......: February 19, 2025
+      *  GitHub URL.: https://github.com/TJoubert004/CobolAssignment3
       *  Description: ADDME
       *****************************************************************
        ENVIRONMENT DIVISION.
@@ -12,14 +12,14 @@
        INPUT-OUTPUT SECTION.
 
        FILE-CONTROL.
-           SELECT CUSTMAST ASSIGN TO CUSTMAST.
-           SELECT RPT2000 ASSIGN TO RPT2000.
+           SELECT INPUT-CUSTMAST ASSIGN TO CUSTMAST.
+           SELECT OUTPUT-RPT2000 ASSIGN TO RPT2000.
 
        DATA DIVISION.
 
        FILE SECTION.
 
-       FD  CUSTMAST
+       FD  INPUT-CUSTMAST
            RECORDING MODE IS F
            LABEL RECORDS ARE STANDARD
            RECORD CONTAINS 130 CHARACTERS
@@ -33,7 +33,7 @@
            05  CM-SALES-LAST-YTD       PIC S9(5)V9(2).
            05  FILLER                  PIC X(87).
 
-       FD  RPT2000
+       FD  OUTPUT-RPT2000
            RECORDING MODE IS F
            LABEL RECORDS ARE STANDARD
            RECORD CONTAINS 130 CHARACTERS
@@ -44,6 +44,10 @@
 
        01  SWITCHES.
            05  CUSTMAST-EOF-SWITCH     PIC X    VALUE "N".
+
+       01  CALCULATION-FIELDS.
+           05  WS-CHANGE-AMOUNT    PIC S9(7)V99   VALUE ZERO.
+           05  WS-CHANGE-PERCENT   PIC S9(3)V9    VALUE ZERO.
 
        01  PRINT-FIELDS.
            05  PAGE-COUNT      PIC S9(3)   VALUE ZERO.
@@ -83,50 +87,83 @@
            05  FILLER          PIC X(1)    VALUE ":".
            05  HL2-MINUTES     PIC 9(2).
            05  FILLER          PIC X(58)   VALUE SPACE.
-           05  FILLER          PIC X(10)   VALUE "RPT1000".
+           05  FILLER          PIC X(10)   VALUE "RPT2000".
            05  FILLER          PIC X(49)   VALUE SPACE.
 
        01  HEADING-LINE-3.
-           05  FILLER      PIC X(20)   VALUE "CUST                ".
-           05  FILLER      PIC X(20)   VALUE "            SALES   ".
-           05  FILLER      PIC X(20)   VALUE "      SALES         ".
-           05  FILLER      PIC X(69)   VALUE SPACE.
+           05  FILLER     PIC X(25)   VALUE "BRANCH SALES CUST        ".
+           05  FILLER     PIC X(21)   VALUE "          SALES      ".
+           05  FILLER     PIC X(14)   VALUE "SALES         ".
+           05  FILLER     PIC X(11)   VALUE "CHANGE     ".
+           05  FILLER     PIC X(7)    VALUE "CHANGE".
 
        01  HEADING-LINE-4.
-           05  FILLER      PIC X(20)   VALUE "NUM    CUSTOMER NAME".
-           05  FILLER      PIC X(20)   VALUE "           THIS YTD ".
-           05  FILLER      PIC X(20)   VALUE "     LAST YTD       ".
-           05  FILLER      PIC X(69)   VALUE SPACE.
+           05  FILLER     PIC X(25)   VALUE "NUM    REP  NUM    CUSTO".
+           05  FILLER     PIC X(21)   VALUE "MER NAME      THIS YT".
+           05  FILLER     PIC X(14)   VALUE "D      LAST Y".
+           05  FILLER     PIC X(13)   VALUE "TD       AMOU".
+           05  FILLER     PIC X(13)    VALUE "NT    PERCENT".
+
+       01  HEADING-LINE-5.
+           05  FILLER PIC X(6)  VALUE ALL "-".
+           05  FILLER PIC X(1)  VALUE SPACE.
+           05  FILLER PIC X(5)  VALUE ALL "-".
+           05  FILLER PIC X(1)  VALUE SPACE.
+           05  FILLER PIC X(5)  VALUE ALL "-".
+           05  FILLER PIC X(2)  VALUE SPACE.
+           05  FILLER PIC X(20) VALUE ALL "-".
+           05  FILLER PIC X(3)  VALUE SPACE.
+           05  FILLER PIC X(10) VALUE ALL "-".
+           05  FILLER PIC X(4)  VALUE SPACE.
+           05  FILLER PIC X(10) VALUE ALL "-".
+           05  FILLER PIC X(4)  VALUE SPACE.
+           05  FILLER PIC X(10) VALUE ALL "-".
+           05  FILLER PIC X(3)  VALUE SPACE.
+           05  FILLER PIC X(6)  VALUE ALL "-".
+           05  FILLER PIC X(36) VALUE SPACE.
 
        01  CUSTOMER-LINE.
+           05  CL-BRANCH-NUMBER    PIC 9(2).
+           05  FILLER              PIC X(4)    VALUE SPACE.
+           05  CL-SALESREP-NUMBER  PIC 9(2).
+           05  FILLER              PIC X(2)    VALUE SPACE.
            05  CL-CUSTOMER-NUMBER  PIC 9(5).
-           05  FILLER              PIC X(2)     VALUE SPACE.
+           05  FILLER              PIC X(2)    VALUE SPACE.
            05  CL-CUSTOMER-NAME    PIC X(20).
-           05  FILLER              PIC X(3)     VALUE SPACE.
+           05  FILLER              PIC X(3)    VALUE SPACE.
            05  CL-SALES-THIS-YTD   PIC ZZ,ZZ9.99-.
-           05  FILLER              PIC X(4)     VALUE SPACE.
+           05  FILLER              PIC X(4)    VALUE SPACE.
            05  CL-SALES-LAST-YTD   PIC ZZ,ZZ9.99-.
-           05  FILLER              PIC X(69)    VALUE SPACE.
+           05  FILLER              PIC X(4)    VALUE SPACE.
+           05  CL-CHANGE-AMOUNT    PIC ZZ,ZZ9.99-.
+           05  FILLER              PIC X(3)    VALUE SPACE.
+           05  CL-CHANGE-PERCENT   PIC ZZ9.9-.
+           05  FILLER              PIC X(36)   VALUE SPACE.
 
        01  GRAND-TOTAL-LINE.
-           05  FILLER              PIC X(27)    VALUE SPACE.
+           05  FILLER              PIC X(40)   VALUE ALL "=".
+           05  FILLER              PIC X(1)    VALUE SPACE.
            05  GTL-SALES-THIS-YTD  PIC Z,ZZZ,ZZ9.99-.
-           05  FILLER              PIC X(1)     VALUE SPACE.
+           05  FILLER              PIC X(1)    VALUE SPACE.
            05  GTL-SALES-LAST-YTD  PIC Z,ZZZ,ZZ9.99-.
-           05  FILLER              PIC X(69)    VALUE SPACE.
+           05  FILLER              PIC X(1)    VALUE SPACE.
+           05  GTL-CHANGE-AMOUNT   PIC Z,ZZZ,ZZ9.99-.
+           05  FILLER              PIC X(2)    VALUE SPACE.
+           05  GTL-CHANGE-PERCENT  PIC ZZ9.9-.
+           05  FILLER              PIC X(36)   VALUE SPACE.
 
        PROCEDURE DIVISION.
 
        000-PREPARE-SALES-REPORT.
 
-           OPEN INPUT  CUSTMAST
-                OUTPUT RPT2000.
+           OPEN INPUT  INPUT-CUSTMAST
+                OUTPUT OUTPUT-RPT2000.
            PERFORM 100-FORMAT-REPORT-HEADING.
            PERFORM 200-PREPARE-SALES-LINES
                UNTIL CUSTMAST-EOF-SWITCH = "Y".
            PERFORM 300-PRINT-GRAND-TOTALS.
-           CLOSE CUSTMAST
-                 RPT2000.
+           CLOSE INPUT-CUSTMAST
+                 OUTPUT-RPT2000.
            STOP RUN.
 
        100-FORMAT-REPORT-HEADING.
@@ -146,7 +183,7 @@
 
        210-READ-CUSTOMER-RECORD.
 
-           READ CUSTMAST
+           READ INPUT-CUSTMAST
                AT END
                    MOVE "Y" TO CUSTMAST-EOF-SWITCH.
 
