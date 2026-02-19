@@ -5,7 +5,12 @@
       *  Programmers: Tristan Joubert Clay Rasmussen
       *  Date.......: February 19, 2025
       *  GitHub URL.: https://github.com/TJoubert004/CobolAssignment3
-      *  Description: ADDME
+      *  Description: The RPT2000 program is an enhanced COBOL 
+      *               reporting tool. It serves as a data processing 
+      *               utility that reads customer financial records 
+      *               from a master input file (CUSTMAST) and 
+      *               generates a formatted, multi-columnar 
+      *               Year-To-Date (YTD) Sales Report.
       *****************************************************************
        ENVIRONMENT DIVISION.
 
