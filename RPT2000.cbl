@@ -1,7 +1,12 @@
        IDENTIFICATION DIVISION.
 
        PROGRAM-ID. RPT2000.
-      * Authors: Clay and Tristan
+      *****************************************************************
+      *  Programmers: Tristan Joubert Clay Rasmussen                   
+      *  Date.......: February 19, 2025                                
+      *  GitHub URL.: https://github.com/TJoubert004/CobolAssignment3  
+      *  Description: ADDME
+      *****************************************************************
        ENVIRONMENT DIVISION.
 
        INPUT-OUTPUT SECTION.
