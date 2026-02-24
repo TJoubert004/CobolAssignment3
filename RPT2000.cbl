@@ -146,8 +146,19 @@
            05  CL-CHANGE-PERCENT   PIC ZZ9.9-.
            05  FILLER              PIC X(36)   VALUE SPACE.
 
+       01  GRAND-TOTAL-LINE-1.
+           05  FILLER              PIC X(45)   VALUE SPACE.
+           05  FILLER              PIC X(13)   VALUE ALL "=".
+           05  FILLER              PIC X(1)    VALUE SPACE.
+           05  FILLER              PIC X(13)   VALUE ALL "=".
+           05  FILLER              PIC X(1)    VALUE SPACE.
+           05  FILLER              PIC X(13)   VALUE ALL "=".
+           05  FILLER              PIC X(2)    VALUE SPACE.
+           05  FILLER              PIC X(7)    VALUE ALL "=".
+           05  FILLER              PIC X(35)   VALUE SPACE.
+
        01  GRAND-TOTAL-LINE-2.
-           05  FILLER              PIC X(40)   VALUE ALL "=".
+           05  FILLER              PIC X(40)   VALUE SPACE.
            05  FILLER              PIC X(1)    VALUE SPACE.
            05  GTL-SALES-THIS-YTD  PIC Z,ZZZ,ZZ9.99-.
            05  FILLER              PIC X(1)    VALUE SPACE.
@@ -237,9 +248,8 @@
            MOVE ZERO TO LINE-COUNT.
 
        300-PRINT-GRAND-TOTALS.
-           MOVE GRAND-TOTAL-THIS-YTD TO GTL-SALES-THIS-YTD.
-           MOVE GRAND-TOTAL-LAST-YTD TO GTL-SALES-LAST-YTD.
-           MOVE GRAND-TOTAL-CHANGE-AMT TO GTL-CHANGE-AMOUNT.
+           MOVE GRAND-TOTAL-LINE-1 TO PRINT-AREA.
+           WRITE PRINT-AREA.
 
            IF GRAND-TOTAL-LAST-YTD = ZERO
                MOVE 999.9 TO GRAND-TOTAL-CHANGE-PCT
@@ -247,6 +257,10 @@
                COMPUTE GRAND-TOTAL-CHANGE-PCT =
                    (GRAND-TOTAL-CHANGE-AMT / GRAND-TOTAL-LAST-YTD) * 100
            END-IF.
+
+           MOVE GRAND-TOTAL-THIS-YTD TO GTL-SALES-THIS-YTD.
+           MOVE GRAND-TOTAL-LAST-YTD TO GTL-SALES-LAST-YTD.
+           MOVE GRAND-TOTAL-CHANGE-AMT TO GTL-CHANGE-AMOUNT.
            MOVE GRAND-TOTAL-CHANGE-PCT TO GTL-CHANGE-PERCENT.
 
            MOVE GRAND-TOTAL-LINE-2 TO PRINT-AREA.
