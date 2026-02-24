@@ -35,7 +35,7 @@ ___
 
 ## Running Output
 ___
-addme
+![Program Output](assets/CodeOutput.png)
 
 ## Learning Outcomes
 ___
