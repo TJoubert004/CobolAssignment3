@@ -35,7 +35,7 @@ ___
 
 ## Running Output
 ___
-![Program Output](assets/CodeOutput.png)
+![Program Output](asset/CodeOutput.png)
 
 ## Learning Outcomes
 ___
